@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.fr.grand.mapper.DeviceInfoMapper">
+	<select id="search_combobox" resultType="Combobox">
+		SELECT DEVICE_SN AS
+		id,DEVICE_SN AS TEXT FROM device_info
+	</select>
+	<select id="getLang" parameterType="String" resultType="String">
+		SELECT dev_language FROM device_info WHERE DEVICE_SN=#{deviceSn}
+	</select>
+	<!-- u_id -->
+	<select id="deviceList" parameterType="org.fr.grand.kaoqin.DeviceInfo"
+		resultType="org.fr.grand.kaoqin.DeviceInfo">
+		SELECT device_id , device_sn , device_name, alias_name,
+		dept_id,
+		state, last_activity, trans_times, trans_interval, log_stamp,
+		op_log_stamp, photo_stamp, fw_version, user_count, fp_count,
+		trans_count, fp_alg_ver, push_version, device_type, ipaddress,
+		dev_language, push_comm_key, face_count, face_alg_ver, reg_face_count,
+		dev_funs,
+		(SELECT COUNT(*) FROM user_info WHERE device_sn=a.DEVICE_SN)
+		act_user_count,
+		(SELECT COUNT(*) FROM pers_bio_template WHERE
+		DEVICE_SN=a.device_sn AND
+		bio_type=1) act_fp_count,
+		(SELECT COUNT(*)
+		FROM pers_bio_template WHERE DEVICE_SN=a.device_sn AND
+		bio_type=2 AND
+		template_no=0) act_face_count
+		FROM device_info a limit #{page},#{limit}
+
+	</select>
+	<select id="deviceListCount" parameterType="org.fr.grand.kaoqin.DeviceInfo"
+		resultType="Integer">
+		SELECT COUNT(device_id) FROM device_info a
+	</select>
+
+	<!-- u_id -->
+	<select id="getAllDeviceInfoList" resultType="org.fr.grand.kaoqin.DeviceInfo">
+		SELECT device_id,
+		device_sn, device_name, alias_name,
+		dept_id, state, last_activity,
+		trans_times, trans_interval,
+		log_stamp, op_log_stamp, photo_stamp,
+		fw_version, user_count,
+		fp_count, trans_count, fp_alg_ver,
+		push_version, device_type,
+		ipaddress, dev_language, push_comm_key,
+		face_count, face_alg_ver,
+		reg_face_count, dev_funs
+		FROM device_info
+	</select>
+
+	<select id="getDeviceInfoBySn" parameterType="String"
+		resultType="org.fr.grand.kaoqin.DeviceInfo">
+		select device_id, device_sn, device_name, alias_name,
+		dept_id, state, last_activity, trans_times, trans_interval,
+		log_stamp,
+		op_log_stamp, photo_stamp, fw_version, user_count,
+		fp_count,
+		trans_count, fp_alg_ver, push_version, device_type,
+		ipaddress,
+		dev_language, push_comm_key, face_count, face_alg_ver,
+		reg_face_count,
+		dev_funs
+		from device_info where device_sn=#{deviceSn}
+
+	</select>
+
+	<update id="updateDeviceState">
+		UPDATE device_info
+		<set>
+			<if test="deviceSn!= null">
+				device_sn=#{deviceSn},
+			</if>
+			<if test="state != null and state !=''">
+				state= #{state},
+			</if>
+			<if test="format!= null and format !=''">
+				last_activity=#{format},
+			</if>
+		</set>
+		WHERE device_sn=#{deviceSn}
+	</update>
+
+	<update id="updateDeviceInfo" parameterType="org.fr.grand.kaoqin.DeviceInfo">
+		UPDATE device_info
+		SET USER_COUNT=#{user_count},FP_COUNT=#{fp_count},
+		FW_VERSION=#{fw_version},
+		FACE_COUNT=#{face_count} WHERE
+		DEVICE_ID=#{device_id}
+	</update>
+	<update id="updateDevice" parameterType="org.fr.grand.kaoqin.DeviceInfo">
+		UPDATE device_info SET device_sn=#{device_sn},
+		device_name=#{device_name}, alias_name=#{alias_name},
+		dept_id=#{dept_id}, state=#{state}, last_activity=#{last_activity},
+		trans_times=#{trans_times},
+		trans_interval=#{trans_interval}, log_stamp=#{log_stamp},
+		op_log_stamp=#{op_log_stamp}, photo_stamp=#{photo_stamp},
+		fw_version=#{fw_version}, user_count=#{user_count},
+		fp_count=#{fp_count}, trans_count=#{trans_count},
+		fp_alg_ver=#{fp_alg_ver}, push_version=#{push_version},
+		device_type=#{device_type}, ipaddress=#{ipaddress},
+
+		dev_language=#{dev_language}, push_comm_key=#{push_comm_key},
+		face_count=#{face_count}, face_alg_ver=#{face_alg_ver},
+		reg_face_count=#{reg_face_count}, dev_funs=#{dev_funs}
+		WHERE device_id=#{device_id}
+
+	</update>
+	<insert id="save" parameterType="org.fr.grand.kaoqin.DeviceInfo">
+				INSERT INTO device_info(DEVICE_SN,DEVICE_NAME,
+		ALIAS_NAME,DEPT_ID,STATE,
+		LAST_ACTIVITY,
+		TRANS_TIMES,
+		TRANS_INTERVAL,LOG_STAMP,
+		OP_LOG_STAMP,PHOTO_STAMP,
+		FW_VERSION,USER_COUNT,
+		FP_COUNT,TRANS_COUNT,
+		FP_ALG_VER,PUSH_VERSION,
+		DEVICE_TYPE,IPADDRESS,
+		DEV_LANGUAGE,PUSH_COMM_KEY,
+		FACE_COUNT,
+		FACE_ALG_VER,REG_FACE_COUNT,
+		DEV_FUNS,TRANS_FLAG,
+		ERROR_DELAY,DELAY,
+		REAL_TIME,ENCRYPT)
+		VALUE(#{device_sn},#{device_name},
+		#{alias_name},#{dept_id},#{state},
+		#{last_activity},#{trans_times},
+		#{trans_interval},#{log_stamp},
+		#{op_log_stamp},#{photo_stamp},#{fw_version},
+		#{user_count},#{fp_count},
+		#{trans_count},#{fp_alg_ver},
+		#{push_version},
+		#{device_type},#{ipaddress},
+		#{dev_language},#{push_comm_key},
+		#{face_count},#{face_alg_ver}
+		,#{reg_face_count},
+		#{dev_funs},#{trans_flag},
+		#{error_delay},
+		#{delay},
+		#{real_time},
+		#{encrypt})
+	</insert>
+</mapper>

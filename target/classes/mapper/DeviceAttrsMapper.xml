@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.fr.grand.mapper.DeviceAttrsMapper">
+	<!-- u_id -->
+	<select id="getDeviceAttrsBySn" parameterType="String"
+		resultType="org.fr.grand.kaoqin.DeviceAttrs">
+		select id, device_sn, attr_name, attr_value
+		from device_attrs where 1=1 and device_sn=#{deviceSn}
+	</select>
+
+</mapper>

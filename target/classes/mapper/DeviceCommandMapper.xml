@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.fr.grand.mapper.DeviceCommandMapper">
+	<select id="getDeviceCommandListToDevice" resultMap="DeviceInfoMap">
+		SELECT dev_cmd_id, device_sn, cmd_content, cmd_commit_times,
+		cmd_trans_times, cmd_over_time, cmd_return
+		FROM device_command WHERE 1=1
+		<if test="devSn!=null and devSn!=''">
+			AND device_sn=#{devSn}
+		</if>
+		AND cmd_return='' ORDER BY dev_cmd_id ASC LIMIT 0, 100
+	</select>
+	<select id="getDeviceCommandById" parameterType="int" resultMap="DeviceInfoMap">
+		SELECT dev_cmd_id, device_sn, cmd_content, cmd_commit_times,
+		cmd_trans_times, cmd_over_time, cmd_return, cmd_return_info
+		FROM device_command WHERE dev_cmd_id=#{devCmdId}
+	</select>
+
+	<update id="update" parameterType="org.fr.grand.kaoqin.DeviceCommand">
+		UPDATE device_command SET device_sn=#{deviceSn}, cmd_content=#{cmdContent},
+		cmd_commit_times=#{cmdCommitTime},
+		cmd_trans_times=#{cmdTransTime},
+		cmd_over_time=#{cmdOverTime},
+		cmd_return=#{cmdReturn}, cmd_return_info=#{cmdReturnInfo}
+		WHERE dev_cmd_id=#{devCmdId}
+
+	</update>
+
+	<insert id="save" parameterType="org.fr.grand.kaoqin.DeviceCommand">
+
+		INSERT INTO device_command(DEVICE_SN,CMD_CONTENT,CMD_COMMIT_TIMES,
+		CMD_TRANS_TIMES,CMD_OVER_TIME,CMD_RETURN,CMD_RETURN_INFO)
+		VALUES(#{deviceSn},#{cmdContent},
+		#{cmdCommitTime},#{cmdTransTime},
+		#{cmdOverTime},#{cmdReturn},
+		#{cmdReturnInfo});
+	</insert>
+	
+	
+	<resultMap id="DeviceInfoMap" type="org.fr.grand.kaoqin.DeviceCommand">
+		<result column="dev_cmd_id" property="devCmdId" />
+		<result column="device_sn" property="deviceSn" />
+		<result column="cmd_content" property="cmdContent" />
+		<result column="cmd_commit_times" property="cmdCommitTime" />
+		<result column="cmd_trans_times" property="cmdTransTime" />
+		<result column="cmd_over_time" property="cmdOverTime" />
+		<result column="cmd_return" property="cmdReturn" />
+		<result column="cmd_return_info" property="cmdReturnInfo" />
+	</resultMap>
+</mapper>

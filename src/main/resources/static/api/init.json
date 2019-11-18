@@ -1,0 +1,234 @@
+{
+  "clearInfo": {
+    "clearUrl": "api/clear.json"
+  },
+  "homeInfo": {
+    "title": "用户数据",
+    "icon": "fa fa-home",
+    "href": "page/table.html"
+  },
+  "logoInfo": {
+    "title": "WDMS",
+    "image": "images/logo.png",
+    "href": ""
+  },
+  "menuInfo": {
+   
+    "currency": {
+      "title": "门禁管理",
+      "icon": "fa fa-address-book",
+      "child": [
+        {
+              "title": "Device",
+              "href": "",
+              "icon": "fa fa-sliders",
+              "target": "_self",
+              "child": [
+            {
+              "title": "Device",
+              "href": "page/device.html"
+
+              
+            }
+            ,
+               {
+              "title": "Log",
+              "href": "page/log.html"
+              
+            },
+               {
+              "title": "WorkCode",
+              "href":"page/404.html"
+          
+              
+            },
+               {
+              "title": "Message",
+              "href": "page/404.html"
+              
+            }
+            
+            ]
+            },
+            {
+              "title": "Personal",
+              "href": "",
+              "icon": "fa fa-street-view",
+              "target": "_self",
+               "child": [
+            {
+              "title": "Area",
+              "href": "page/404.html",
+              "target": "_self"
+            },
+               {
+              "title": "Department",
+              "href": "page/404.html",
+              "target": "_self"
+              
+            },
+               {
+              "title": "Employee",
+              "href": "page/404.html",
+              "target": "_self"
+              
+            },
+        
+                {
+              "title": "Transaction",
+              "href": "page/404.html",
+              "target": "_self"
+            }
+            
+            ]
+            },
+               {
+              "title": "Log",
+              "href": "page/welcome-2.html",
+              "icon": "fa fa-edit",
+              "target": "_self",
+               "child": [
+            {
+              "title": "Admin Log",
+              "href": "page/404.html",
+              "target": "_self"
+              
+            },
+               {
+              "title": "Monitor",
+              "href": "page/404.html",
+              "target": "_self"
+              
+            }]
+            },
+            {
+              "title": "User",
+              "href": "",
+              "target": "_self",
+              "icon": "fa fa-group",
+               "child": [
+            {
+              "title": "Role",
+              "href": "page/404.html",
+              "target": "_self"
+              
+            },
+               {
+              "title": "User",
+              "href": "page/404.html",
+              "target": "_self"
+              
+            },
+                    {
+              "title": "Company",
+              "href": "page/404.html",
+              "target": "_self"
+            }]
+            },  {
+              "title": "Database",
+              "href": "",
+              "icon": "fa fa-code-fork",
+              "target": "_self",
+                "child": [
+            {
+              "title": "Migrate",
+              "href": "page/404.html",
+              "target": "_self"
+              
+            }]
+            }
+          ]
+      }
+      ,
+    "component": {
+      "title": "组件管理",
+      "icon": "fa fa-lemon-o",
+      "child": [
+        {
+          "title": "图标列表",
+          "href": "page/icon.html",
+          "icon": "fa fa-dot-circle-o",
+          "target": "_self"
+        },
+        {
+          "title": "图标选择",
+          "href": "page/icon-picker.html",
+          "icon": "fa fa-adn",
+          "target": "_self"
+        },
+        {
+          "title": "颜色选择",
+          "href": "page/color-select.html",
+          "icon": "fa fa-dashboard",
+          "target": "_self"
+        },
+        {
+          "title": "下拉选择",
+          "href": "page/table-select.html",
+          "icon": "fa fa-angle-double-down",
+          "target": "_self"
+        },
+        {
+          "title": "文件上传",
+          "href": "page/upload.html",
+          "icon": "fa fa-arrow-up",
+          "target": "_self"
+        },
+        {
+          "title": "富文本编辑器",
+          "href": "page/editor.html",
+          "icon": "fa fa-edit",
+          "target": "_self"
+        }
+      ]
+    },
+    "other": {
+      "title": "其它管理",
+      "icon": "fa fa-slideshare",
+      "child": [
+        {
+          "title": "多级菜单",
+          "href": "",
+          "icon": "fa fa-meetup",
+          "target": "",
+          "child": [
+            {
+              "title": "按钮1",
+              "href": "page/button.html",
+              "icon": "fa fa-calendar",
+              "target": "_self",
+              "child": [
+                {
+                  "title": "按钮2",
+                  "href": "page/button.html",
+                  "icon": "fa fa-snowflake-o",
+                  "target": "_self",
+                  "child": [
+                    {
+                      "title": "按钮3",
+                      "href": "page/button.html",
+                      "icon": "fa fa-snowflake-o",
+                      "target": "_self"
+                    },
+                    {
+                      "title": "表单4",
+                      "href": "page/form.html",
+                      "icon": "fa fa-calendar",
+                      "target": "_self"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "失效菜单",
+          "href": "page/error.html",
+          "icon": "fa fa-superpowers",
+          "target": "_self"
+        }
+      ]
+    }
+  }
+}

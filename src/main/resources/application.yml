@@ -1,0 +1,33 @@
+server:
+  port: 8666
+  servlet:
+    context-path:  /iclock
+  tomcat:
+    uri-encoding: utf-8
+spring: 
+  freemarker: 
+    suffix: .html
+    cache: false
+  resources:
+    static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,classpath:/templates/
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  aop:
+    proxy-target-class: true
+  datasource: 
+        name: pushdemo
+        url: jdbc:mysql://127.0.0.1:3306/pushdemo?useUnicode=yes&characterEncoding=UTF8
+        username: root
+        password: 123456
+        # 使用druid数据源
+       ## type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.jdbc.Driver 
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: org.fr.grand.kaoqin
+  
+
+
+  

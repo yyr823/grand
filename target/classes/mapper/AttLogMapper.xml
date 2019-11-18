@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.fr.grand.mapper.AttLogMapper">
+	<select id="logList" parameterType="org.fr.grand.kaoqin.UserCheck"
+		resultType="org.fr.grand.kaoqin.AttLog">
+		SELECT att_log_id, user_pin,
+		verify_type, verify_time, STATUS, work_code, sensor_no, att_flag, device_sn,
+		reserved1, reserved2, (SELECT NAME FROM user_info WHERE
+		DEVICE_SN=a.DEVICE_SN
+		AND USER_PIN=a.USER_PIN) user_name FROM att_log a
+		<where>
+			<if test="device_sn 
+		!= null and device_sn != '' "> AND DEVICE_SN=#{device_sn} </if>
+			<if test="startTime 
+		!= null and startTime != ''"> AND DATE(VERIFY_TIME) BETWEEN
+				#{startTime}
+				AND #{endTime} </if> 
+		</where>
+		order by verify_time desc
+		limit #{page},#{limit}
+	</select>
+	<select id="logListCount" parameterType="org.fr.grand.kaoqin.UserCheck"
+		resultType="Integer">
+		SELECT COUNT(att_log_id) FROM att_log a
+		<where>
+			<if test="device_sn != null 
+		and device_sn != '' "> AND DEVICE_SN=#{device_sn} </if>
+			<if test="startTime 
+		!= null and startTime != ''"> AND DATE(VERIFY_TIME) BETWEEN
+				#{startTime}
+				AND #{endTime} </if>
+		</where>
+	</select>
+	<insert id="save" parameterType="org.fr.grand.kaoqin.AttLog">
+		INSERT INTO
+		att_log(USER_PIN,VERIFY_TYPE,VERIFY_TIME,
+		STATUS,WORK_CODE,SENSOR_NO,ATT_FLAG,DEVICE_SN)
+		VALUE(#{user_pin},#{verify_type},#{verify_time},
+		#{status},#{work_code},#{sensor_no},#{att_flag},#{device_sn})
+
+	</insert>
+</mapper>

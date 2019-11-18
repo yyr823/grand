@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.fr.grand.mapper.PersonBioTemplateMapper">
+	<select id="fatchList" parameterType="String" resultMap="PersonBioMap">
+		select id, user_id, user_pin, device_sn, valid,
+		is_duress, bio_type,
+		version, data_format,
+		template_no, template_no_index, size,
+		template_data from pers_bio_template
+		where
+		user_id in
+		<foreach item="user_id" index="index" collection="user_ids"
+			open="(" separator="," close=")">
+			#{user_id}
+		</foreach>
+	</select>
+	<insert id="save" parameterType="org.fr.grand.kaoqin.PersonBioTemplate">
+
+	INSERT INTO pers_bio_template(USER_ID,USER_PIN,DEVICE_SN,VALID,IS_DURESS,BIO_TYPE,
+	VERSION,DATA_FORMAT,TEMPLATE_NO,TEMPLATE_NO_INDEX,SIZE,TEMPLATE_DATA)
+		VALUE(#{userId},#{userPin},#{deviceSn},
+		#{valid},#{isDuress},#{bioType},
+		#{version},#{dataFormat},
+		#{templateNo},
+		#{templateNoIndex},#{size},
+		#{templateData})
+
+	</insert>
+	<update id="updateTemplate"  parameterType="org.fr.grand.kaoqin.PersonBioTemplate">
+	    UPDATE pers_bio_template
+SET USER_ID=#{userId},USER_PIN=#{userPin},DEVICE_SN=#{deviceSn},
+VALID=#{valid},IS_DURESS=#{isDuress},BIO_TYPE=#{bioType},
+VERSION=#{version},DATA_FORMAT=#{dataFormat},
+TEMPLATE_NO=#{templateNo},TEMPLATE_NO_INDEX=#{templateNoIndex},
+SIZE=#{size},TEMPLATE_DATA=#{templateData}
+WHERE ID==#{id}
+	</update>
+		<delete id="deleteBioTemplate" parameterType="java.util.List">
+	DELETE FROM pers_bio_template WHERE user_id IN
+	<foreach collection="list" item="id" open="(" close=")" separator=",">
+		#{id}
+	</foreach>
+	
+</delete>
+		<delete id="deleteFromServerByType" >
+	DELETE FROM pers_bio_template WHERE BIO_TYPE=#{bioType} and  user_id IN
+	<foreach collection="ids" item="id" open="(" close=")" separator=",">
+		#{id}
+	</foreach>
+
+</delete>
+	<select id="getById" resultType="org.fr.grand.kaoqin.PersonBioTemplate"  parameterType="int" >
+	SELECT * FROM pers_bio_template WHERE ID=#{id}
+	</select>
+	
+	<resultMap id="PersonBioMap" type="org.fr.grand.kaoqin.PersonBioTemplate">
+		<result column="id" property="id" />
+		<result column="user_id" property="userId" />
+		<result column="user_pin" property="userPin" />
+		<result column="device_sn" property="deviceSn" />
+		<result column="valid" property="valid" />
+		<result column="is_duress" property="isDuress" />
+		<result column="bio_type" property="bioType" />
+		<result column="version" property="version" />
+		<result column="data_format" property="dataFormat" />
+		<result column="template_no" property="templateNo" />
+		<result column="template_no_index" property="templateNoIndex" />
+		<result column="size" property="size" />
+		<result column="template_data" property="templateData" />
+	</resultMap>
+</mapper>
