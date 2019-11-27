@@ -17,7 +17,8 @@
 		op_log_stamp, photo_stamp, fw_version, user_count, fp_count,
 		trans_count, fp_alg_ver, push_version, device_type, ipaddress,
 		dev_language, push_comm_key, face_count, face_alg_ver, reg_face_count,
-		dev_funs,
+		dev_funs,area_id,
+		(SELECT area_name FROM AREA WHERE id=a.area_id)as area_name,
 		(SELECT COUNT(*) FROM user_info WHERE device_sn=a.DEVICE_SN)
 		act_user_count,
 		(SELECT COUNT(*) FROM pers_bio_template WHERE
@@ -27,12 +28,43 @@
 		FROM pers_bio_template WHERE DEVICE_SN=a.device_sn AND
 		bio_type=2 AND
 		template_no=0) act_face_count
-		FROM device_info a limit #{page},#{limit}
+		FROM device_info a 
+			<where>
+			<if test="device_sn 
+		!= null and device_sn != ''"> 
+		AND device_sn = #{device_sn} 
+		 </if>
+			<if test="device_name 
+		!= null and device_name != ''"> 
+			AND device_name like CONCAT('%',#{device_name},'%') 
+			</if> 
+				<if test="area_id 
+		!= null"> 
+			AND area_id =#{area_id} 
+			</if>
+		</where>
+		order by DEVICE_ID desc
+		limit #{page},#{limit}
+		
 
 	</select>
 	<select id="deviceListCount" parameterType="org.fr.grand.kaoqin.DeviceInfo"
 		resultType="Integer">
 		SELECT COUNT(device_id) FROM device_info a
+					<where>
+			<if test="device_sn 
+		!= null and device_sn != ''"> 
+		AND device_sn = #{device_sn} 
+		 </if>
+			<if test="device_name 
+		!= null and device_name != ''"> 
+			AND device_name like CONCAT('%',#{device_name},'%') 
+			</if> 
+				<if test="area_id 
+		!= null "> 
+			AND area_id =#{area_id} 
+			</if>
+		</where>
 	</select>
 
 	<!-- u_id -->
@@ -66,6 +98,7 @@
 		from device_info where device_sn=#{deviceSn}
 
 	</select>
+	
 
 	<update id="updateDeviceState">
 		UPDATE device_info
@@ -124,7 +157,7 @@
 		FACE_ALG_VER,REG_FACE_COUNT,
 		DEV_FUNS,TRANS_FLAG,
 		ERROR_DELAY,DELAY,
-		REAL_TIME,ENCRYPT)
+		REAL_TIME,ENCRYPT,area_id)
 		VALUE(#{device_sn},#{device_name},
 		#{alias_name},#{dept_id},#{state},
 		#{last_activity},#{trans_times},
@@ -141,6 +174,28 @@
 		#{error_delay},
 		#{delay},
 		#{real_time},
-		#{encrypt})
+		#{encrypt},#{area_id})
 	</insert>
+	
+	<insert id="deviceAdd" parameterType="org.fr.grand.kaoqin.DeviceInfo">
+			INSERT INTO device_info(DEVICE_SN,DEVICE_NAME,area_id,LAST_ACTIVITY)
+			VALUE(#{device_sn},#{device_name},#{area_id},NOW())
+	    
+	</insert>
+	<update id="deviceModify" parameterType="org.fr.grand.kaoqin.DeviceInfo">
+	    Update device_info 
+	    set DEVICE_SN=#{device_sn},DEVICE_NAME=#{device_name},
+	    area_id=#{area_id},LAST_ACTIVITY=NOW() where  device_id=#{device_id};
+	</update>
+	<delete id="deleteById" parameterType="Integer">
+	    delete from device_info where device_id=#{id}
+	    
+	</delete>
+	<delete id="deleteByIds" parameterType="java.util.List">
+	 DELETE FROM device_info WHERE device_id in
+		<foreach collection="list" item="id" open="(" close=")"
+			separator=",">
+			#{id}
+		</foreach>
+	</delete>
 </mapper>

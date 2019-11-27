@@ -50,4 +50,28 @@ public interface DeviceInfoMapper {
 	 */
 	int save(DeviceInfo devInfo);
 
+	/**
+	 * @param deviceInfo
+	 * @return
+	 */
+	int deviceAdd(DeviceInfo deviceInfo);
+
+	/**
+	 * @param deviceInfo
+	 * @return
+	 */
+	int deviceModify(DeviceInfo deviceInfo);
+
+	/**
+	 * @param id
+	 * @return
+	 */
+	int deleteById(Integer id);
+
+	/**
+	 * @param dids
+	 * @return
+	 */
+	int deleteByIds(List<Integer> dids);
+
 }

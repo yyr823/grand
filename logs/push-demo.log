@@ -1,0 +1,55 @@
+0    ERROR 2019-11-27 16:01:25186 WebControllerAop:62 - 
+47   INFO  2019-11-27 16:01:25233 WebControllerAop:67 - Response: [{"id":"2","text":"F"},{"id":"3","text":"E"},{"id":"4","text":"D"},{"id":"8","text":"C"},{"id":"9","text":"B"},{"id":"10","text":"A"}]
+132  ERROR 2019-11-27 16:01:25318 WebControllerAop:62 - 
+146  INFO  2019-11-27 16:01:25332 WebControllerAop:67 - Response: [{"id":"4843182260054","text":"4843182260054"},{"id":"6222180360187","text":"6222180360187"}]
+159  INFO  2019-11-27 16:01:25345 WebControllerAop:60 - hello
+174  ERROR 2019-11-27 16:01:25360 WebControllerAop:62 - 
+177  INFO  2019-11-27 16:01:25363 WebControllerAop:67 - Response: [{"id":"2","text":"F"},{"id":"3","text":"E"},{"id":"4","text":"D"},{"id":"8","text":"C"},{"id":"9","text":"B"},{"id":"10","text":"A"}]
+192  INFO  2019-11-27 16:01:25378 WebControllerAop:67 - Response: {"code":0,"msg":"success","count":7,"data":[{"user_id":7,"user_pin":"96","privilege":0,"name":"cat96","password":"123462","face_group_id":0,"acc_group_id":0,"dept_id":0,"is_group_tz":0,"isNewRecord":false,"verify_type":0,"main_card":"7","expires":0,"device_sn":"4843182260054","photo_id_size":0,"userFpCount":0,"userFaceCount":0,"category":1,"area_id":"2,3","area_name":"F,E"},{"user_id":6,"user_pin":"95","privilege":0,"name":"cat95","password":"123461","face_group_id":0,"acc_group_id":0,"dept_id":0,"is_group_tz":0,"isNewRecord":false,"verify_type":0,"main_card":"6","expires":0,"device_sn":"4843182260054","photo_id_size":0,"userFpCount":0,"userFaceCount":0,"category":1,"area_id":"2,3","area_name":"F,E"},{"user_id":5,"user_pin":"94","privilege":0,"name":"cat94","password":"123460","face_group_id":0,"acc_group_id":0,"dept_id":0,"is_group_tz":0,"isNewRecord":false,"verify_type":0,"main_card":"5","expires":0,"device_sn":"4843182260054","photo_id_size":0,"userFpCount":0,"userFaceCount":0,"category":1,"area_id":"2,3","area_name":"F,E"},{"user_id":4,"user_pin":"93","privilege":0,"name":"cat93","password":"123459","face_group_id":0,"acc_group_id":0,"dept_id":0,"is_group_tz":0,"isNewRecord":false,"verify_type":0,"main_card":"4","expires":0,"device_sn":"4843182260054","photo_id_size":0,"userFpCount":0,"userFaceCount":0,"category":1,"area_id":"2,3","area_name":"F,E"},{"user_id":3,"user_pin":"92","privilege":0,"name":"cat92","password":"123458","face_group_id":0,"acc_group_id":0,"dept_id":0,"is_group_tz":0,"isNewRecord":false,"verify_type":0,"main_card":"3","expires":0,"device_sn":"4843182260054","photo_id_size":0,"userFpCount":0,"userFaceCount":0,"category":1,"area_id":"2,3","area_name":"F,E"},{"user_id":2,"user_pin":"91","privilege":0,"name":"cat91","password":"123457","face_group_id":0,"acc_group_id":0,"dept_id":0,"is_group_tz":0,"isNewRecord":false,"verify_type":0,"main_card":"2","expires":0,"device_sn":"4843182260054","photo_id_size":0,"userFpCount":0,"userFaceCount":0,"category":1,"area_id":"2,3","area_name":"F,E"},{"user_id":1,"user_pin":"90","privilege":0,"name":"cat90","password":"123456","face_group_id":0,"acc_group_id":0,"dept_id":0,"is_group_tz":0,"isNewRecord":false,"verify_type":0,"main_card":"1","expires":0,"device_sn":"4843182260054","photo_id_size":0,"userFpCount":0,"userFaceCount":0,"category":1,"area_id":"2,3","area_name":"F,E"}]}
+25394 INFO  2019-11-27 16:01:50580 WebControllerAop:60 - hello
+25404 INFO  2019-11-27 16:01:50590 WebControllerAop:67 - Response: {"code":0,"msg":"success","count":7,"data":[{"user_id":7,"user_pin":"96","privilege":0,"name":"cat96","password":"123462","face_group_id":0,"acc_group_id":0,"dept_id":0,"is_group_tz":0,"isNewRecord":false,"verify_type":0,"main_card":"7","expires":0,"device_sn":"4843182260054","photo_id_size":0,"userFpCount":0,"userFaceCount":0,"category":1,"area_id":"2,3","area_name":"F,E"},{"user_id":6,"user_pin":"95","privilege":0,"name":"cat95","password":"123461","face_group_id":0,"acc_group_id":0,"dept_id":0,"is_group_tz":0,"isNewRecord":false,"verify_type":0,"main_card":"6","expires":0,"device_sn":"4843182260054","photo_id_size":0,"userFpCount":0,"userFaceCount":0,"category":1,"area_id":"2,3","area_name":"F,E"},{"user_id":5,"user_pin":"94","privilege":0,"name":"cat94","password":"123460","face_group_id":0,"acc_group_id":0,"dept_id":0,"is_group_tz":0,"isNewRecord":false,"verify_type":0,"main_card":"5","expires":0,"device_sn":"4843182260054","photo_id_size":0,"userFpCount":0,"userFaceCount":0,"category":1,"area_id":"2,3","area_name":"F,E"},{"user_id":4,"user_pin":"93","privilege":0,"name":"cat93","password":"123459","face_group_id":0,"acc_group_id":0,"dept_id":0,"is_group_tz":0,"isNewRecord":false,"verify_type":0,"main_card":"4","expires":0,"device_sn":"4843182260054","photo_id_size":0,"userFpCount":0,"userFaceCount":0,"category":1,"area_id":"2,3","area_name":"F,E"},{"user_id":3,"user_pin":"92","privilege":0,"name":"cat92","password":"123458","face_group_id":0,"acc_group_id":0,"dept_id":0,"is_group_tz":0,"isNewRecord":false,"verify_type":0,"main_card":"3","expires":0,"device_sn":"4843182260054","photo_id_size":0,"userFpCount":0,"userFaceCount":0,"category":1,"area_id":"2,3","area_name":"F,E"},{"user_id":2,"user_pin":"91","privilege":0,"name":"cat91","password":"123457","face_group_id":0,"acc_group_id":0,"dept_id":0,"is_group_tz":0,"isNewRecord":false,"verify_type":0,"main_card":"2","expires":0,"device_sn":"4843182260054","photo_id_size":0,"userFpCount":0,"userFaceCount":0,"category":1,"area_id":"2,3","area_name":"F,E"},{"user_id":1,"user_pin":"90","privilege":0,"name":"cat90","password":"123456","face_group_id":0,"acc_group_id":0,"dept_id":0,"is_group_tz":0,"isNewRecord":false,"verify_type":0,"main_card":"1","expires":0,"device_sn":"4843182260054","photo_id_size":0,"userFpCount":0,"userFaceCount":0,"category":1,"area_id":"2,3","area_name":"F,E"}]}
+0    ERROR 2019-11-27 16:02:2017 WebControllerAop:62 - / by zero
+36   INFO  2019-11-27 16:02:2053 WebControllerAop:67 - Response: {"code":0,"msg":"success","count":7,"data":[{"user_id":7,"user_pin":"96","privilege":0,"name":"cat96","password":"123462","face_group_id":0,"acc_group_id":0,"dept_id":0,"is_group_tz":0,"isNewRecord":false,"verify_type":0,"main_card":"7","expires":0,"device_sn":"4843182260054","photo_id_size":0,"userFpCount":0,"userFaceCount":0,"category":1,"area_id":"2,3","area_name":"F,E"},{"user_id":6,"user_pin":"95","privilege":0,"name":"cat95","password":"123461","face_group_id":0,"acc_group_id":0,"dept_id":0,"is_group_tz":0,"isNewRecord":false,"verify_type":0,"main_card":"6","expires":0,"device_sn":"4843182260054","photo_id_size":0,"userFpCount":0,"userFaceCount":0,"category":1,"area_id":"2,3","area_name":"F,E"},{"user_id":5,"user_pin":"94","privilege":0,"name":"cat94","password":"123460","face_group_id":0,"acc_group_id":0,"dept_id":0,"is_group_tz":0,"isNewRecord":false,"verify_type":0,"main_card":"5","expires":0,"device_sn":"4843182260054","photo_id_size":0,"userFpCount":0,"userFaceCount":0,"category":1,"area_id":"2,3","area_name":"F,E"},{"user_id":4,"user_pin":"93","privilege":0,"name":"cat93","password":"123459","face_group_id":0,"acc_group_id":0,"dept_id":0,"is_group_tz":0,"isNewRecord":false,"verify_type":0,"main_card":"4","expires":0,"device_sn":"4843182260054","photo_id_size":0,"userFpCount":0,"userFaceCount":0,"category":1,"area_id":"2,3","area_name":"F,E"},{"user_id":3,"user_pin":"92","privilege":0,"name":"cat92","password":"123458","face_group_id":0,"acc_group_id":0,"dept_id":0,"is_group_tz":0,"isNewRecord":false,"verify_type":0,"main_card":"3","expires":0,"device_sn":"4843182260054","photo_id_size":0,"userFpCount":0,"userFaceCount":0,"category":1,"area_id":"2,3","area_name":"F,E"},{"user_id":2,"user_pin":"91","privilege":0,"name":"cat91","password":"123457","face_group_id":0,"acc_group_id":0,"dept_id":0,"is_group_tz":0,"isNewRecord":false,"verify_type":0,"main_card":"2","expires":0,"device_sn":"4843182260054","photo_id_size":0,"userFpCount":0,"userFaceCount":0,"category":1,"area_id":"2,3","area_name":"F,E"},{"user_id":1,"user_pin":"90","privilege":0,"name":"cat90","password":"123456","face_group_id":0,"acc_group_id":0,"dept_id":0,"is_group_tz":0,"isNewRecord":false,"verify_type":0,"main_card":"1","expires":0,"device_sn":"4843182260054","photo_id_size":0,"userFpCount":0,"userFaceCount":0,"category":1,"area_id":"2,3","area_name":"F,E"}]}
+0    ERROR 2019-11-27 16:13:39289 WebControllerAop:58 - 
+221  ERROR 2019-11-27 16:13:39510 WebControllerAop:58 - 
+259  ERROR 2019-11-27 16:13:39548 WebControllerAop:58 - 
+0    ERROR 2019-11-27 16:19:20547 WebControllerAop:58 - 
+119  ERROR 2019-11-27 16:19:20666 WebControllerAop:58 - 
+168  ERROR 2019-11-27 16:19:20715 WebControllerAop:58 - 
+0    ERROR 2019-11-27 17:09:0624 WebControllerAop:58 - 
+2254 ERROR 2019-11-27 17:09:08278 WebControllerAop:58 - 
+2829 ERROR 2019-11-27 17:09:08853 WebControllerAop:58 - 
+3273 ERROR 2019-11-27 17:09:09297 WebControllerAop:58 - 
+32240 ERROR 2019-11-27 17:09:38264 WebControllerAop:58 - 
+37987 ERROR 2019-11-27 17:09:4411 WebControllerAop:58 - 
+38501 ERROR 2019-11-27 17:09:44525 WebControllerAop:58 - 
+40304 ERROR 2019-11-27 17:09:46328 WebControllerAop:58 - 
+52050 ERROR 2019-11-27 17:09:5874 WebControllerAop:58 - 
+0    ERROR 2019-11-27 17:12:43481 WebControllerAop:58 - 
+0    ERROR 2019-11-27 17:18:39417 WebControllerAop:58 - 
+11653 ERROR 2019-11-27 17:18:5170 WebControllerAop:58 - 
+11700 ERROR 2019-11-27 17:18:51117 WebControllerAop:58 - 
+25892 ERROR 2019-11-27 17:19:05309 WebControllerAop:58 - 
+25905 ERROR 2019-11-27 17:19:05322 WebControllerAop:58 - 
+79859 ERROR 2019-11-27 17:19:59276 WebControllerAop:58 - 
+102403 ERROR 2019-11-27 17:20:21820 WebControllerAop:58 - 
+102413 ERROR 2019-11-27 17:20:21830 WebControllerAop:58 - 
+0    ERROR 2019-11-27 17:22:2157 WebControllerAop:58 - 
+7872 ERROR 2019-11-27 17:22:28929 WebControllerAop:58 - 
+7937 ERROR 2019-11-27 17:22:28994 WebControllerAop:58 - 
+32501 ERROR 2019-11-27 17:22:53558 WebControllerAop:58 - 
+43011 ERROR 2019-11-27 17:23:0468 WebControllerAop:58 - 
+43034 ERROR 2019-11-27 17:23:0491 WebControllerAop:58 - 
+50226 ERROR 2019-11-27 17:23:11283 WebControllerAop:58 - 
+50240 ERROR 2019-11-27 17:23:11297 WebControllerAop:58 - 
+60805 ERROR 2019-11-27 17:23:21862 WebControllerAop:58 - 
+61257 ERROR 2019-11-27 17:23:22314 WebControllerAop:58 - 
+61459 ERROR 2019-11-27 17:23:22516 WebControllerAop:58 - 
+61475 ERROR 2019-11-27 17:23:22532 WebControllerAop:58 - 
+128850 ERROR 2019-11-27 17:24:29907 WebControllerAop:58 - 
+128982 ERROR 2019-11-27 17:24:3039 WebControllerAop:58 - 
+129001 ERROR 2019-11-27 17:24:3058 WebControllerAop:58 - 
+130327 ERROR 2019-11-27 17:24:31384 WebControllerAop:58 - 
+130466 ERROR 2019-11-27 17:24:31523 WebControllerAop:58 - 
+130478 ERROR 2019-11-27 17:24:31535 WebControllerAop:58 - 
+135479 ERROR 2019-11-27 17:24:36536 WebControllerAop:58 - 

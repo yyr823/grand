@@ -122,7 +122,8 @@ public class DeviceInfo extends BaseEntity implements Serializable {
 	private int delay;
 	private int real_time;
 	private String trans_flag;
-	private int encrypt;	
-
-	
+	private int encrypt;
+	private Integer area_id;
+	@Transient
+	private String area_name;
 }

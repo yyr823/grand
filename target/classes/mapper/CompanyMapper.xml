@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.fr.grand.mapper.CompanyMapper">
+	<select id="search_combobox" resultType="Combobox">
+		SELECT id,company_name AS TEXT FROM company
+	</select>
+    
+    	<select id="companyList" parameterType="org.fr.grand.kaoqin.Company"
+		resultType="org.fr.grand.kaoqin.Company">
+        SELECT * FROM company
+		<where>
+			<if test="company_name 
+		!= null and company_name != '' and act=='Contain'"> 
+		AND company_name  like CONCAT('%',#{company_name},'%') 
+		 </if>
+			<if test="company_name 
+		!= null and company_name != '' and act=='Exact'"> 
+			AND company_name =#{company_name} 
+			</if> 
+		</where>
+		order by id desc
+		limit #{page},#{limit}
+	</select>
+	<select id="companyCount" parameterType="org.fr.grand.kaoqin.Company"
+		resultType="Integer">
+		SELECT COUNT(id) FROM company
+		<where>
+		<if test="company_name 
+		!= null and company_name != '' and act=='Contain'"> 
+		AND company_name  like CONCAT('%',#{company_name},'%') 
+		 </if>
+			<if test="company_name 
+		!= null and company_name != '' and act=='Exact'"> 
+			AND company_name =#{company_name} 
+			</if> 
+		</where>
+	</select>
+	
+	<insert id="companyAdd" parameterType="org.fr.grand.kaoqin.Company">
+	    INSERT INTO company(company_name) VALUE(#{company_name})    
+	</insert>
+	
+	<update id="companyModify" parameterType="org.fr.grand.kaoqin.Company">
+	    
+	    UPDATE company SET company_name=#{company_name} 
+	    WHERE id =#{id}
+	</update>
+	
+	<delete id="deleteById" parameterType="Integer">
+	    DELETE  FROM company WHERE id=#{id}
+	</delete>
+	
+		<delete id="deleteByIds" parameterType="java.util.List">
+	   DELETE  FROM company WHERE id in 
+	<foreach collection="list" item="id" open="(" close=")" separator=",">
+		#{id}
+	</foreach>
+</delete>
+</mapper>

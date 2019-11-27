@@ -1,5 +1,8 @@
 package org.fr.grand.controller;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.subject.Subject;
 import org.fr.grand.util.CommonString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -9,7 +12,7 @@ public class BaseController extends CommonString {
 	@Autowired
 	protected MessageSource messageSource;
 	public static final String MSG = "msg";
-	public static final String STATE = "state";
+	public static final String STATE = "stat e";
 	public static final String DATA = "data";
 	public static final String TOTAl = "total";
 	public static final String ROWS = "rows";
@@ -17,6 +20,12 @@ public class BaseController extends CommonString {
 	public static final String ISERROR = "isError";
 	public static final String TYPE = "type";
 	public static final String TIME = "time";
+	 protected void login(AuthenticationToken token) {
+	        getSubject().login(token);
+	    }
+	    private Subject getSubject() {
+	        return SecurityUtils.getSubject();
+	    }
 
 	public ModelMap createModelMap(boolean state, String msg, Object data) {
 		ModelMap map = new ModelMap();
@@ -26,6 +35,12 @@ public class BaseController extends CommonString {
 		return map;
 	}
 
+	public ModelMap jsonResult(Integer code, String msg) {
+		ModelMap map = new ModelMap();
+		map.put("code", code);
+		map.put("msg", msg);
+		return map;
+	}
 	public ModelMap createModelMap_easyui(boolean state, int count, Object rows, Object footer) {
 		ModelMap map = new ModelMap();
 		map.put("state", Boolean.valueOf(state));
@@ -43,6 +58,7 @@ public class BaseController extends CommonString {
 		return map;
 	}
 
+	
 	public ModelMap errorMsg(int count, String msg) {
 		ModelMap map = new ModelMap();
 		if(count>0) {
@@ -52,8 +68,11 @@ public class BaseController extends CommonString {
 			map.put("code", 0);
 			map.put("msg", msg+"失败,该用户暂未拥有此项数据");	
 		}
+
 		return map;
+		
 	}
+	
 
 
 }

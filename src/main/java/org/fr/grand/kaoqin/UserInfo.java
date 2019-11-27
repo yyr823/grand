@@ -85,7 +85,8 @@ public class UserInfo extends BaseEntity implements Serializable  {
 	private String meet_code;
 	/** Category */
 	private int category;
-
-	
+	private String area_id;
+	@Transient
+     private String area_name;
 	private MultipartFile userPic; // myFile属性用来封装上传的文件
 }

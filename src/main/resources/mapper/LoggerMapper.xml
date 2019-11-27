@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.fr.grand.mapper.LoggerEntityMapper">
+	<insert id="addOne" parameterType="org.fr.grand.kaoqin.LoggerEntity">
+		INSERT INTO logger_infos(clientip,clienturl,methodss,operatess,currtime)
+		VALUES(#{clientip},#{clienturl},#{methodss},
+		#{operatess},#{currtime});
+	</insert>
+		<select id="logList" parameterType="org.fr.grand.kaoqin.UserCheck"
+		resultType="org.fr.grand.kaoqin.LoggerEntity">
+     SELECT * FROM  logger_infos 
+		<where>
+		<if test="startTime 
+		!= null and startTime != ''"> AND DATE(currtime) BETWEEN
+				#{startTime}
+				
+				AND #{endTime} </if> 
+		</where>
+		order by currtime desc
+		limit #{page},#{limit}
+	</select>
+	<select id="logListCount" parameterType="org.fr.grand.kaoqin.UserCheck"
+		resultType="Integer">
+		SELECT COUNT(id) FROM logger_infos
+		<where>
+			<if test="startTime 
+		!= null and startTime != ''"> AND DATE(currtime) BETWEEN
+				#{startTime}
+				
+				AND #{endTime} </if> 
+		</where>
+	</select>
+</mapper>

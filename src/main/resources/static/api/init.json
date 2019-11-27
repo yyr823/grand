@@ -58,7 +58,7 @@
                "child": [
             {
               "title": "Area",
-              "href": "page/404.html",
+              "href": "page/area.html",
               "target": "_self"
             },
                {
@@ -121,7 +121,7 @@
             },
                     {
               "title": "Company",
-              "href": "page/404.html",
+              "href": "page/company.html",
               "target": "_self"
             }]
             },  {

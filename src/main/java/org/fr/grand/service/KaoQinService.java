@@ -23,6 +23,7 @@ import org.fr.grand.util.PushUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 /**
  * @author PE
  * @date 2019年8月4日 下午9:42:16
@@ -114,7 +115,6 @@ public class KaoQinService {
 		if (null == userInfos) {
 			return -1;
 		}
-
 		/** get the biometrics template list from database */
 		if (!haveDestSn || (haveDestSn && (isSupportFP || isSupportFace))) {
 			bioTemplates = personBioTemplateMapper.fatchList(ids);
@@ -205,10 +205,26 @@ public class KaoQinService {
 	public void userAdd(UserInfo userInfo) {
 		userInfoMapper.addUserInfo(userInfo);
 		UserInfo u = userInfoMapper.getMax();
-		sendUserDev(u.getUser_id() + "", userInfo.getDevice_sn());
+		List<String> dns = userInfoMapper.getDevice_SnByArea(u.getUser_id());
+		for (String sn : dns) {
+			sendUserDev(u.getUser_id() + "", sn);
+		}
+
+	}
+
+	public void userAddBySn(UserInfo u) {
+		List<String> dns = userInfoMapper.getDevice_SnByArea(u.getUser_id());
+		boolean flag = dns.contains(u.getDevice_sn());
+		if (!flag) {
+			sendUserDev(u.getUser_id() + "", u.getDevice_sn());
+		}
+		for (String sn : dns) {
+			sendUserDev(u.getUser_id() + "", sn);
+		}
 	}
 
 	public int sendUserDev(String ids, String sn) {
+		System.out.println("sendUserDev");
 		new Thread(new Runnable() {
 			public void run() {
 				createUpdateUserInfosCommandByIds(ids, sn);
@@ -217,7 +233,6 @@ public class KaoQinService {
 		return 1;
 	}
 
-	
 	/**
 	 * @param userId
 	 * @param sn
@@ -230,12 +245,11 @@ public class KaoQinService {
 				public void run() {
 					createUpdateUserInfosCommandByIds(userId, deviceSn);
 				}
-			}).start();	
+			}).start();
 		}
 		return 1;
 	}
-	
-	
+
 	public void userUpdate(UserInfo userInfo) {
 		userInfoMapper.updateUser(userInfo);
 		sendUserDev(userInfo.getUser_id() + "", userInfo.getDevice_sn());
@@ -481,7 +495,13 @@ public class KaoQinService {
 		return 1;
 	}
 
-
-
+	/**
+	 * @param device_sn
+	 * @param user_pin
+	 * @return
+	 */
+	public UserInfo getByAuthenUserBySnAndId(String device_sn, String user_pin) {
+		return userInfoMapper.getByAuthenUserBySnAndId(device_sn, user_pin);
+	}
 
 }

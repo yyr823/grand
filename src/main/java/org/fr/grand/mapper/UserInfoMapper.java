@@ -48,6 +48,26 @@ public interface UserInfoMapper {
 	 */
 	int updateUserPic(List<UserInfo> list);
 
+	/**
+	 * @return
+	 */
+	List<String> getDevice_SnByArea(Integer uid);
+
+	/**
+	 * @param device_sn
+	 * @param user_pin
+	 * @return
+	 */
+	UserInfo getByAuthenUserBySnAndId(@Param("sn")String device_sn,@Param("pin")String user_pin);
+
+	/**
+	 * @param username
+	 * @param password
+	 * @return
+	 */
+	UserInfo getUserByNameAndPassward(@Param("username")String username,
+			@Param("password")String password);
+
 
 
 }

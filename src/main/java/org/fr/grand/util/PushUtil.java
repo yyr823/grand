@@ -42,6 +42,8 @@ public class PushUtil {
 	
 	/**Device cache*/
 	public static Map<String, DeviceInfo> devMaps = new HashMap<String, DeviceInfo>();
+	public static Map<String, DeviceInfo> captchas = new HashMap<String, DeviceInfo>();
+	
 	/**language resource*/
 //	public static ResourceBundle resource = ResourceBundle.getBundle("PushDemoResource");
 	/**date format*/
@@ -169,6 +171,7 @@ public class PushUtil {
 	/**Gets all the device list from server. store it into the cache.*/
 	 @PostConstruct
 		public void  init() {
+		 
 			List<DeviceInfo> list = deviceInfoMapper.getAllDeviceInfoList();
 			for (DeviceInfo deviceInfo : list) {
 				List<DeviceAttrs> attrs = deviceAttrsMapper.getDeviceAttrsBySn(deviceInfo.getDevice_sn());

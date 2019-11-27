@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="org.fr.grand.mapper.UserInfoMapper">
+
+	<select id="getUserByNameAndPassward" resultType="org.fr.grand.kaoqin.UserInfo">
+		SELECT * FROM USER WHERE user_name=#{username} AND passward=#{password}
+	</select>
+
+	<select id="getByAuthenUserBySnAndId" resultType="org.fr.grand.kaoqin.UserInfo">
+		SELECT * FROM user_info WHERE USER_PIN=#{pin} AND DEVICE_SN=#{sn}
+	</select>
+	<select id="getDevice_SnByArea" resultType="String"
+		parameterType="Integer">
+		SELECT DEVICE_SN FROM device_info WHERE area_id
+		REGEXP (SELECT CONCAT('[',
+		(SELECT area_id FROM user_info WHERE USER_ID=#{uid}),']') )
+	</select>
+
 	<select id="getMax" resultType="org.fr.grand.kaoqin.UserInfo">
 		SELECT * FROM user_info ORDER BY
 		USER_ID DESC LIMIT 1
@@ -14,26 +29,28 @@
 		verify_type, main_card, vice_card,
 		expires, device_sn, tz, photo_id_name,
 		photo_id_size, photo_id_content,
-		meet_code, category,
-		(SELECT COUNT(*) FROM pers_bio_template WHERE
+		meet_code, category,area_id,
+		(SELECT COUNT(*) FROM pers_bio_template
+		WHERE
 		BIO_TYPE=1
 		AND DEVICE_SN=a.DEVICE_SN AND USER_ID=a.USER_ID)
 		userFpCount,
 		(SELECT COUNT(*) FROM pers_bio_template WHERE BIO_TYPE=2
 		AND DEVICE_SN=a.DEVICE_SN AND USER_ID=a.USER_ID)
-		userFaceCount
+		userFaceCount,
+		(SELECT GROUP_CONCAT(area_name SEPARATOR ',') FROM AREA u
+		WHERE u.id REGEXP (SELECT CONCAT('[',a.area_id,']') ) ) AS area_name
 		FROM
-		user_info a 
+		user_info a
 		<where>
-			<if test="device_sn != null and device_sn != '' ">device_sn = #{device_sn}</if>
+			<if test="area_id != null and area_id != '' ">
+				area_id LIKE CONCAT ('%',#{area_id},'%')
+			</if>
 			<if test="name != null and name != '' ">AND name LIKE CONCAT(CONCAT('%', #{name}),'%')</if>
 		</where>
+		order by user_pin desc
 		limit #{page},#{limit}
 	</select>
-	
-	
-	
-	
 	<select id="userListCount" parameterType="org.fr.grand.kaoqin.UserInfo"
 		resultType="Integer">
 		SELECT COUNT( user_id) FROM user_info
@@ -43,19 +60,19 @@
 		</where>
 	</select>
 	<insert id="addUserInfo" parameterType="org.fr.grand.kaoqin.UserInfo">
-INSERT INTO user_info(USER_PIN,PRIVILEGE,NAME,
-PASSWORD,FACE_GROUP_ID,ACC_GROUP_ID,
-DEPT_ID,IS_GROUP_TZ,VERIFY_TYPE,MAIN_CARD,
-VICE_CARD,EXPIRES,
-TZ,PHOTO_ID_NAME,
-PHOTO_ID_SIZE,PHOTO_ID_CONTENT,
-DEVICE_SN,category)
-VALUES(#{user_pin},#{privilege},#{name},
-#{password},#{face_group_id},#{acc_group_id},
-#{dept_id},#{is_group_tz},#{verify_type},#{main_card},
-#{vice_card},#{expires},#{tz},#{photo_id_name},#{photo_id_size},
-#{photo_id_content},#{device_sn},#{category}
-)
+		INSERT INTO user_info(USER_PIN,PRIVILEGE,NAME,
+		PASSWORD,FACE_GROUP_ID,ACC_GROUP_ID,
+		DEPT_ID,IS_GROUP_TZ,VERIFY_TYPE,MAIN_CARD,
+		VICE_CARD,EXPIRES,
+		TZ,PHOTO_ID_NAME,
+		PHOTO_ID_SIZE,PHOTO_ID_CONTENT,
+		DEVICE_SN,category,area_id)
+		VALUES(#{user_pin},#{privilege},#{name},
+		#{password},#{face_group_id},#{acc_group_id},
+		#{dept_id},#{is_group_tz},#{verify_type},#{main_card},
+		#{vice_card},#{expires},#{tz},#{photo_id_name},#{photo_id_size},
+		#{photo_id_content},#{device_sn},#{category},#{area_id}
+		)
 	</insert>
 
 	<select id="getUserInfoByPinAndSn" resultType="org.fr.grand.kaoqin.UserInfo">
@@ -85,12 +102,11 @@ VALUES(#{user_pin},#{privilege},#{name},
 		acc_group_id=#{acc_group_id}, dept_id=#{dept_id},
 		is_group_tz=#{is_group_tz}, verify_type=#{verify_type},
 		main_card=#{main_card}, vice_card=#{vice_card},
-		expires=#{expires},
-		device_sn=#{device_sn}, tz=#{tz},
-		photo_id_name=#{photo_id_name},
-		photo_id_size=#{photo_id_size},
-		photo_id_content=#{photo_id_content},
-		meet_code=#{meet_code}, category=#{category} 
+		expires=#{expires},area_id=#{area_id},
+		device_sn=#{device_sn},
+		tz=#{tz},
+		<!-- photo_id_name=#{photo_id_name}, photo_id_size=#{photo_id_size}, photo_id_content=#{photo_id_content}, -->
+		meet_code=#{meet_code}, category=#{category}
 		WHERE user_id=#{user_id}
 
 	</update>
@@ -111,31 +127,43 @@ VALUES(#{user_pin},#{privilege},#{name},
 		</foreach>
 
 	</select>
-	
-	
-	<delete id="deleteUserInfo" parameterType="java.util.List">
-	DELETE FROM user_info WHERE user_id in 
-	<foreach collection="list" item="id" open="(" close=")" separator=",">
-		#{id}
-	</foreach>
-</delete>
 
-<update id="deleteUserPicFromServer" parameterType="java.util.List">
-		UPDATE user_info SET  photo_id_name=NULL, photo_id_size=0,photo_id_content=NULL
-		 WHERE user_id IN 
-	<foreach collection="list" item="id" open="(" close=")" separator=",">
-		#{id}
-	</foreach>
-</update>
-<update id="updateUserPic" parameterType="java.util.List">
-     <foreach collection="list" item="item" index="index" open="" close="" separator=","> 
-  UPDATE user_info  
-          <set> 
-          photo_id_name=#{item.photo_id_name},photo_id_size=#{item.photo_id_size},
-photo_id_content=#{item.photo_id_content}
-          </set> 
-          where user_id = #{item.user_id}
-      </foreach> 
-</update>
-	
+
+	<delete id="deleteUserInfo" parameterType="java.util.List">
+		DELETE FROM user_info WHERE user_id in
+		<foreach collection="list" item="id" open="(" close=")"
+			separator=",">
+			#{id}
+		</foreach>
+	</delete>
+
+	<update id="deleteUserPicFromServer" parameterType="java.util.List">
+		UPDATE user_info SET photo_id_name=NULL,
+		photo_id_size=0,photo_id_content=NULL
+		WHERE user_id IN
+		<foreach collection="list" item="id" open="(" close=")"
+			separator=",">
+			#{id}
+		</foreach>
+	</update>
+	<update id="updateUserPic" parameterType="java.util.List">
+		 
+		<foreach collection="list" item="item" index="index" open=""
+			close="" separator=",">
+			 
+			  UPDATE user_info  
+			          
+			<set> 
+				        
+				 photo_id_name=#{item.photo_id_name},photo_id_size=#{item.photo_id_size},
+				photo_id_content=#{item.photo_id_content}
+				          
+			</set>
+			 
+			          where user_id = #{item.user_id}
+			      
+		</foreach>
+		 
+	</update>
+
 </mapper>

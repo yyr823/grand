@@ -14,6 +14,7 @@
 			<if test="startTime 
 		!= null and startTime != ''"> AND DATE(VERIFY_TIME) BETWEEN
 				#{startTime}
+				
 				AND #{endTime} </if> 
 		</where>
 		order by verify_time desc
